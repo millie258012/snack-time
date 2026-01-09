@@ -20,6 +20,10 @@ const Profile = () => {
     return null;
   }
 
+  const avatarUrl = user.avatar_url && !user.avatar_url.startsWith('http')
+    ? `http://localhost:8001${user.avatar_url}`
+    : user.avatar_url;
+
   const handleAvatarClick = () => {
     fileInputRef.current.click();
   };
@@ -75,7 +79,7 @@ const Profile = () => {
             <div className="relative group cursor-pointer" onClick=${handleAvatarClick}>
               <div 
                 className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-32 h-32 border-4 border-primary/20" 
-                style=${{ backgroundImage: `url("${user.avatar_url}")` }}
+                style=${{ backgroundImage: `url("${avatarUrl}")` }}
               ></div>
               <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="material-symbols-outlined text-white text-4xl">photo_camera</span>
